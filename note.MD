@@ -216,3 +216,112 @@
 ### Tuple length
 ### Create tuple with one item
 ### Tuple items - data types
+
+
+## Python If else
+- Equals: a == b
+- Not Equals: a != b
+- Less than: a < b
+- Less than or equal to: a <= b
+- Greater than: a > b
+- Greater than or equal to: a >= b
+
+### Elif
+    - tương tự else if trong PHP
+    - Ví dụ:
+        a = 33
+        b = 33
+        if b > a:
+        print("b is greater than a")
+        elif a == b:
+        print("a and b are equal")
+
+### Else
+### Short hand if
+    - Ví dụ:
+        if a > b: print("a is greater than b")
+
+### Short hand if ...else
+    - Nếu bạn chỉ cần 1 dòng để xử lý, 1 dành cho if và 1 dành cho else bạn có thể đặt tất cả và trong cùng 1 dòng.
+    - Ví dụ:
+        a = 2
+        b = 330
+        print("A") if a > b else print("B")
+    
+    - Cũng có thể có nhiều câu lệnh else trên cùng 1 dòng.
+    - Ví dụ:
+        a = 330
+        b = 330
+        print("A") if a > b else print("=") if a == b else print("B")
+
+### And
+    - tường tự toán sử tử logic && trong PHP
+    - Ví dụ:
+        a = 200
+        b = 33
+        c = 500
+        if a > b and c > a:
+        print("Both conditions are True")
+
+### Or
+### Not
+### Nested if (lồng nhau)
+### The pass statement
+    - trả về dạng void, tức là no content
+
+## Python while loops
+## Python For loops
+    - Vòng lặp for được sử dụng để lặp lại 1 chuỗi (list, set, dictionary, ...)
+    - Từ khóa for ít giống trong các ngôn ngữ lập trình khác và hoạt động giống  1 phương thức lặp hơn như được tìm thấy trong các ngôn nghữ lập trình hướng đối tượng khác.
+    - Để ngắt vòng lặp ta có thể dùng từ khóa break.
+    - Ví dụ:
+        fruits = ["apple", "banana", "cherry"]
+        for x in fruits:
+        print(x)
+        if x == "banana":
+            break
+
+    - Để bỏ qua 1 vòng lặp ta có thể sử dụng từ khóa continue.
+    - Ví dụ:
+        fruits = ["apple", "banana", "cherry"]
+        for x in fruits:
+        if x == "banana":
+            continue
+        print(x)
+
+    - Hàm range() để lặp qua 1 bộ mã với số lần xác định.
+    - Ví dụ:
+        for x in range(6):
+            print(x)
+    
+    - Từ khóa else sẽ được chạy khi vòng lặp kết thúc, và nó sẽ không hoạt động nếu gặp break.
+    - Ví dụ:
+        for x in range(6):
+            print(x)
+        else:
+            print("Finally finished!")
+
+    - Các vòng lặp không thể trống, nhưng nếu vì lý do nào đó bạ có 1 vòng lặp for mà không có nội dụung, hãy đưa câu lệnh pass để tránh gặp lỗi.
+    - Ví dụ:
+        for x in [0, 1, 2]:
+            pass
+
+## Python Functions
+- Function là 1 khối code chỉ được chạy khi được gọi.
+### Arbitrary Arguments, *args
+    - Nếu bạn không có bao nhiêu đối số sẽ được truyền vào hàm, hãy thêm * trước tên tham số trong hàm đã định nghĩa.
+    - Ví dụ:
+        def my_function(*kids):
+            print("The youngest child is " + kids[2])
+
+        my_function("Emil", "Tobias", "Linus")
+
+
+### Arbitrary Keyword Arguments, **kwargs (Đối số từ khóa tùy ý)
+    - Nếu bạn không biết có bao nhiêu đối số từ khóa sẽ được truyền vào hàm của mình, hãy thêm hai dấu hoa thị: ** trước tên tham số trong định nghĩa hàm.
+    - Bằng cách này, hàm sẽ nhận được 1 từ điển các đối số và có thể truy cập các mục tương ứng.
+    - Ví dụ:
+        def my_function(**kid):
+            print("His last name is " + kid["lname"])
+
+        my_function(fname = "Tobias", lname = "Refsnes")
