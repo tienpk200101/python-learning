@@ -325,3 +325,148 @@
             print("His last name is " + kid["lname"])
 
         my_function(fname = "Tobias", lname = "Refsnes")
+
+## Python Lambda
+    - Lambda function laf 1 hàm ẩn danh nhỏ.
+    - Hàm lambda có thể nhận bất kỳ số lượng đối số nào nhưng chỉ có thể có 1 biểu thức.
+    - Cú pháp: lambda arguments : expression
+    - ví dụ:
+        x = lambda a : a + 10
+        print(x(5))
+
+### Tại sao nên sử dụng hàm lambda?
+    - Sức mạnh của lambda được thể hiện rõ hơn khi bạn sử dụng chúng như một hàm ẩn danh bên trong 1 hàm khác.
+    - Giả sử bạn có 1 hàm định nghĩa nhận vào 1 đối số và đối số đó sẽ được nhân với 1 số chưa xác định:
+        def myfunc(n):
+            return lambda a : a * n
+
+    - Hoặc sử dụng hàm định nghĩa tương tự để tạo 1 hàm luôn nhân 3 số bạn gửi vào:
+        def myfunc(n):
+            return lambda a : a * n
+
+        mytripler = myfunc(3)
+
+        print(mytripler(11))
+
+## Python Arrays
+- Lưu ý: Hướng dẫn bạn cách sử dụng Lists dưới dạng Arrays, tuy nhiên để làm viếc với mảng trong Python, bạn sẽ phải nhập 1 thư viện, như thư viên NumPy.
+- Phương thức mảng:
+    - append():	Adds an element at the end of the list
+    - clear():	Removes all the elements from the list
+    - copy():	Returns a copy of the list
+    - count():	Returns the number of elements with the specified value
+    - extend():	Add the elements of a list (or any iterable), to the end of the current list
+    - index():	Returns the index of the first element with the specified value
+    - insert():	Adds an element at the specified position
+    - pop()	Removes the element at the specified position
+    - remove():	Removes the first item with the specified value
+    - reverse():	Reverses the order of the list
+    - sort():	Sorts the list
+
+## Python Classes and Objects
+- Python là 1 ngôn ngữ hướng đối tượng
+- Hầu hết mọi thứ trong Python đều là 1 đối tượng, vói các thuộc tính và phương thức.
+- Class giống như 1 hàm tạo đối tượng hoặc 1 "bản thiết kế" để tạo đối tượng.
+
+### Create a class
+- để tạo 1 class ta sử dụng từ khóa class:
+- Ví dụ:
+    class MyClass:
+        x = 5
+
+### Create object
+- ví dụ:
+    p1 = MyClass()
+    print(p1.x)
+
+### The __init__() function
+    - hàm __init__(), hàm này luôn được thực thi khi lướp được khởi tạo.
+    - Sử dụng hàm __init__() để gán giá trị cho thuộc tính đối tượng hoặc các thao tác khác cần thực hiện khi đối tượng được tạo:
+    - Ví dụ:
+        class Person:
+            def __init__(self, name, age):
+                self.name = name
+                self.age = age
+
+        p1 = Person("John", 36)
+
+        print(p1.name)
+        print(p1.age)
+
+### The __str__() function
+    - Hàm __str__() kiểm soát nhưng gì sẽ được trả về khi đối tượng lớp được biểu diễn dưới dạng 1 chuỗi.
+    - nếu hàm __str__() ko được đặtm biểu diễn chuỗi của đối tượng sẽ được trả về.
+    - Ví dụ:
+        - Biểu diễn chuỗi của một đối tượng KHÔNG CÓ hàm __str__():
+            class Person:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.age = age
+
+            p1 = Person("John", 36)
+
+            print(p1)
+
+        - Biểu diễn chuỗi của một đối tượng VỚI hàm __str__():
+            class Person:
+                def __init__(self, name, age):
+                    self.name = name
+                    self.age = age
+
+                def __str__(self):
+                    return f"{self.name}({self.age})"
+
+            p1 = Person("John", 36)
+
+            print(p1)
+
+### Object Methods
+    - Các đối tượng cũng có thể chứa các phương thức. Các phương thức trong đối tượng là các hàm thuộc về đối tượng.
+    - Ví dụ:
+        class Person:
+            def __init__(self, name, age):
+                self.name = name
+                self.age = age
+
+            def myfunc(self):
+                print("Hello my name is " + self.name)
+
+        p1 = Person("John", 36)
+        p1.myfunc()
+
+#### Luư ý: Tham ssoo self này là tham chiếu đến phiên bản hiện tại của lớp và được sử dụng để truy cập các biến thuộc lớp.
+
+### The self Parameter
+    - Nó không cần phải được đặt tên là self, bạn có thể gọi nó là gì bạn thích, nhưng nó phải là tham số đầu tiên của bất kỳ hàm nào trong lớp.
+    - Ví dụ:
+        class Person:
+            def __init__(mysillyobject, name, age):
+                mysillyobject.name = name
+                mysillyobject.age = age
+
+            def myfunc(abc):
+                print("Hello my name is " + abc.name)
+
+        p1 = Person("John", 36)
+        p1.myfunc()
+
+### Modify Object properties
+    - Bạn có thể sử đổi thuộc tính trên các đối tượng như thế này:
+    - Ví dụ:
+        p1.age = 40
+
+### Delete object properties
+    - Bạn có thể xóa thuộc tính của 1 đối tượng bằng cách sử dụng từ khóa del.
+    - Ví dụ:
+        del p1.age
+
+### Delete object
+    - Có thể xóa 1 đối tượng bằng có sử dụng từ khóa del.
+    - Ví dụ:
+        del p1
+
+### The pass statement
+    - Định nghĩa class không được để trong, nhưng nếu vì lý do nào đó bạn có định nghĩa class ko có nội dung thì hãy đưa câu lệnh pass vào để tránh bị lỗi.
+    - Ví dụ:
+        class Person:
+            pass
