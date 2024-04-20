@@ -395,7 +395,7 @@
 
 ### The __str__() function
     - Hàm __str__() kiểm soát nhưng gì sẽ được trả về khi đối tượng lớp được biểu diễn dưới dạng 1 chuỗi.
-    - nếu hàm __str__() ko được đặtm biểu diễn chuỗi của đối tượng sẽ được trả về.
+    - nếu hàm __str__() ko được đặt biểu diễn chuỗi của đối tượng sẽ được trả về.
     - Ví dụ:
         - Biểu diễn chuỗi của một đối tượng KHÔNG CÓ hàm __str__():
             class Person:
@@ -470,3 +470,353 @@
     - Ví dụ:
         class Person:
             pass
+
+## Python Inheritance
+    - Kế thừa cho phép chúng ta định nghĩa 1 lớp kế thừa tắt cả các phương thức và thuộc tính từ 1 lớp khác.
+    - Class cha là lớp được kế thừa từ đó, còn được gọi là lớp cở sở.
+    - Class con là lớp kế thừa từ lớp khác, còn gọi là lớp dẫn xuất.
+
+### Create a parent class
+     - Ví dụ:
+        class Person:
+            def __init__(self, fname, lname):
+                self.firstname = fname
+                self.lastname = lname
+
+            def printname(self):
+                print(self.firstname, self.lastname)
+
+            #Use the Person class to create an object, and then execute the printname method:
+
+        x = Person("John", "Doe")
+        x.printname()
+
+### Create a child class
+    - Ví dụ:
+        class Student(Person):
+            pass
+
+### __init__() function
+    - Khi bạn thêm hàm __init__(), lớp con sẽ không còn kế thừa hàm __init__() của lớp cha nữa.
+    - Lưu Y: __init__() con sẽ ghi đè sự kế thừa của hàm __init__() cha.
+    - Để giữ tính kế thừa hàm __init__(), hàm thêm lệnh gọi vào hàm __init__() cha.
+    - Ví dụ:
+        class Student(Person):
+            def __init__(self, fname, lname):
+                Person.__init__(self, fname, lname)
+
+### super() Function
+    - Python cũng có 1 hàm super() sẽ làm cho lớp con kế thừa tất cả các phương thức và thuộc tính từ lóp cha của nó:
+    - Ví dụ:
+        class Student(Person):
+            def __init__(self, fname, lname):
+                super().__init__(fname, lname)
+
+    - Khi bạn sử dụng hàm super(), bạn không cần phải sử dụng tên của phần tử cha, nó sẽ tự động kế thừa các phương pháp và thuộc tính từ phần tử cha của nó.
+
+### Add properties
+    - Ví dụ:
+        class Student(Person):
+            def __init__(self, fname, lname):
+                super().__init__(fname, lname)
+                self.graduationyear = 2019
+
+### Add Methods
+    - Ví dụ:
+        class Student(Person):
+            def __init__(self, fname, lname, year):
+                super().__init__(fname, lname)
+                self.graduationyear = year
+
+            def welcome(self):
+                print("Welcome", self.firstname, self.lastname, "to the class of", self.graduationyear)
+
+## Python Iterator
+    - Trình vòng lặp là 1 đối tượng chứa một số lượng giá trị có thể đếm được.
+    - Trình vòng lặp là 1 đối tượng có thể được lặp lại, nghĩa là bạn có thể duyệt qua tất cả các giá trị.
+    - Về mặt kỹ thuật, trong Python, iterator là 1 đối tượng thực hiện giao thức iterator, bao gồm các phương thức __iter__() và __next__().
+
+### Interator vs Iterable
+    -   Lists, tuples, dictionaries and sets đều là các đối tượng có thể lặp lại. Chúng là các thùng chứa có thể lặp lại mà bạn có thể lấy 1 trong vong lặp từ đó.
+    - Tất cả các đối tượng này đều có 1 phương thức iter() được sử dụng để lấy 1 trình vòng lặp.
+    - Ví dụ:
+        mytuple = ("apple", "banana", "cherry")
+        myit = iter(mytuple)
+
+        print(next(myit))
+        print(next(myit))
+        print(next(myit))
+
+    - Ngay cả các chuỗi cũng là các đối tượng có thể lặp lại và có thể tả về 1 trình vòng lặp.
+    - Ví dụ:
+        mystr = "banana"
+        myit = iter(mystr)
+
+        print(next(myit))
+        print(next(myit))
+        print(next(myit))
+        print(next(myit))
+        print(next(myit))
+        print(next(myit))
+
+### Create a iterator
+    - Phương thức __iter__() hoạt động tương tự phương thức __init__(), có thể thực hiện các thao tác khởi tạo..., nhưng phải luôn trả về chính đối tượng iterator.
+    - Phương thức __next__() cũng cho phép bạn thực hiện các thao tác và phải trả về mục tiếp theo trong chuỗi.
+    - Ví dụ:
+        class MyNumbers:
+            def __iter__(self):
+                self.a = 1
+                return self
+
+            def __next__(self):
+                x = self.a
+                self.a += 1
+                return x
+
+        myclass = MyNumbers()
+        myiter = iter(myclass)
+
+        print(next(myiter))
+        print(next(myiter))
+        print(next(myiter))
+        print(next(myiter))
+        print(next(myiter))
+
+### Stop
+    - để ngăn việc lặp lại diễn ra mãi mãi, chúng ta có thể sử dụng câu lệnh StopIteration.
+    - Trong phương thức __next__(), ta có thể thêm điều kiện kết thúc để phải sinh lỗi nếu việc lặp lại được thực hiện 1 số lần xác định.
+    - Ví dụ:
+        class MyNumbers:
+            def __iter__(self):
+                self.a = 1
+                return self
+
+            def __next__(self):
+                if self.a <= 20:
+                x = self.a
+                self.a += 1
+                return x
+                else:
+                raise StopIteration
+
+        myclass = MyNumbers()
+        myiter = iter(myclass)
+
+        for x in myiter:
+            print(x)
+
+## Python Polymorphism (Tính đa hình)
+    - Từ "đa hình" có nghĩa là "many forms" và trong lập trình, nó đề cập đến các phương thức/hàm/ toán từ có cùng tên có thể được thực thi trên nhiều đối tượng hoặc lớp.
+
+### Function polymorphism (Đa hình hàm)
+### Class polymorphism (đa hình lớp)
+    - Ví dụ:
+        class Car:
+            def __init__(self, brand, model):
+                self.brand = brand
+                self.model = model
+
+            def move(self):
+                print("Drive!")
+
+            class Boat:
+            def __init__(self, brand, model):
+                self.brand = brand
+                self.model = model
+
+            def move(self):
+                print("Sail!")
+
+            class Plane:
+            def __init__(self, brand, model):
+                self.brand = brand
+                self.model = model
+
+            def move(self):
+                print("Fly!")
+
+        car1 = Car("Ford", "Mustang")       #Create a Car class
+        boat1 = Boat("Ibiza", "Touring 20") #Create a Boat class
+        plane1 = Plane("Boeing", "747")     #Create a Plane class
+
+        for x in (car1, boat1, plane1):
+        x.move()
+
+### Inheritance class polymorphism (Đa hình lớp kế thừa)
+    - Ví dụ:
+        class Vehicle:
+            def __init__(self, brand, model):
+                self.brand = brand
+                self.model = model
+
+            def move(self):
+                print("Move!")
+
+            class Car(Vehicle):
+            pass
+
+            class Boat(Vehicle):
+            def move(self):
+                print("Sail!")
+
+            class Plane(Vehicle):
+            def move(self):
+                print("Fly!")
+
+        car1 = Car("Ford", "Mustang") #Create a Car object
+        boat1 = Boat("Ibiza", "Touring 20") #Create a Boat object
+        plane1 = Plane("Boeing", "747") #Create a Plane object
+
+        for x in (car1, boat1, plane1):
+        print(x.brand)
+        print(x.model)
+        x.move()
+
+    - Lớp con kế thừa các thuộc tính và phương thức từ lớp cha
+    
+## Python scrope (Tính phạm vi)
+    - Một biến chỉ có sẵn trong vùng mà nó được tạo ra. Điều này được gọi là scope(phạm vi).
+
+### Local scope
+    - 1 biến được tạo bên trong 1 hàm thuộc phạm vi cục bộ của hàm đó và chỉ có thể được sử dụng bên trong hàm đó.
+    - Ví dụ:   
+        def myfunc():
+            x = 300
+            print(x)
+
+        myfunc()
+
+#### Function inside function (Hàm bên trong hàm)
+    - Ví dụ:
+        def myfunc():
+            x = 300
+            def myinnerfunc():
+                print(x)
+            myinnerfunc()
+
+        myfunc() => 300
+
+### Global scope
+    - Biến được tạo trong phần chình của mã python là biến toàn cục và thuộc phạm vi toàn cục.
+    - Các biến toàn cục có sẵn trong mọi phạm vi, toàn cục và cục bộ.
+    - Ví dụ:
+        x = 300
+
+        def myfunc():
+                print(x)    
+
+        myfunc()
+        print(x)
+    - 1 Biến được tạo bên ngoài hàm là biến toàn cục và bất kỳ ai cũng có thể sử dụng.
+
+### Global key:
+    - Nếu cần tạo 1 biến toàn cục nhưng bị kẹt trong phạm vi cục bộ, ta có thể sử dụng từ khóa global.
+    - Từ khóa global làm cho biến có tính toàn cục.
+    - Ví dụ:
+        def myfunc():
+            global x
+            x = 300
+
+        myfunc()
+
+        print(x)
+
+    - Ngoài ra, hãy sử dụng từ khóa global nếu muốn thay đổi biến toàn cục bên trong hàm.
+    - Ví dụ:
+        x = 300
+
+        def myfunc():
+            global x
+            x = 200
+
+        myfunc()
+
+        print(x)
+
+### Nonlocal key:
+    - Từ khóa nonlocal được sử dụng để làm việc với các biến bên trong các hàm lồng nhau.
+    - Từ khóa này làm cho biến thuộc về hàm bên ngoài.
+    - Ví dụ:
+        def myfunc1():
+            x = "Jane"
+            def myfunc2():
+                nonlocal x
+                x = "hello"
+            myfunc2()
+            return x
+
+        print(myfunc1()) // hello
+
+
+## Python modules
+### What is module:
+    - Hãy coi 1 module giống như 1 thư viện mã.
+    - 1 tệp chứa tập hợp các hàm bạn muốn đưa vào ứng dụng của mk.
+
+### Create a module
+    - Để tạo 1 module, chỉ cần lưu mã bạn muốn vào 1 tệp có phầm mở rộng tệp .py
+    - Ví dụ: lưu code và 1 tệp có tên là mymodule.py
+        def greeting(name):
+            print("Hello, " + name)
+
+### Use a module
+    - Để có thể sử dụng module mà ta vừa tạo ta sử dụng câu lệnh import.
+    - Ví dụ:
+        import mymodule
+
+        mymodule.greeting("Jonathan")
+
+### Variables in module
+    - Module có thể chứa các hàm, như đc mô tả, nhưng cũng có thể chứa các biến thoại mọi loại (list, dictionary, object, ...).
+    - Ví dụ: Lưu mã này vào tập tinmymodule.py
+        person1 = {
+            "name": "John",
+            "age": 36,
+            "country": "Norway"
+        }
+
+    Nhập mô-đun có tên mymodule và truy cập từ điển Person1:
+        import mymodule
+
+        a = mymodule.person1["age"]
+        print(a)
+
+### Naming a module
+### Re-naming a module
+    - Ví dụ:
+        import mymodule as mx
+
+        a = mx.person1["age"]
+        print(a)
+
+### Built-in modules
+    - Ví dụ:
+        import platform
+
+        x = platform.system()
+        print(x)
+
+### Using the dir() function
+    - Có 1 hàm tích hợp để liệt kê tất cả các tên hàm (hoặc biến) trong 1 module. Chức năng dir():
+    - Ví dụ:
+        import platform
+
+        x = dir(platform)
+        print(x)
+    - Lưu ý: hàm dir() có thể dược sử dụng trên tất cả các module, kể cả những module bạn tự tạo.
+
+### Input from mmodule
+    - Bạn có thể chọn chỉ nhập các phần tù module bằng cách sử dụng từ khóa from:
+    - Ví du: Module có tên mymodulecó một chức năng và một từ điển:
+        def greeting(name):
+        print("Hello, " + name)
+
+        person1 = {
+            "name": "John",
+            "age": 36,
+            "country": "Norway"
+        }
+    Chỉ nhập từ điển Person1 từ mô-đun:
+        from mymodule import person1
+
+        print (person1["age"])
