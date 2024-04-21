@@ -820,3 +820,157 @@
         from mymodule import person1
 
         print (person1["age"])
+
+## Python Dates
+    - Python date không phải là 1 kiểu dữ liệu riêng, nhưng ta có thể nhập 1 module có tên là datetime được làm việc với đối tượng ngày tháng.
+    - Ví dụ:
+         import datetime
+
+            x = datetime.datetime.now()
+            print(x)
+
+### Date output
+    - Module datetime có nhiều phương thức để trả ra thông tin đối tượng date
+    - Ví dụ:
+        import datetime
+
+        x = datetime.datetime.now()
+
+        print(x.year)
+        print(x.strftime("%A"))
+
+### Creating date objects
+    - Để tạo 1 date, chúng ta có thể sử dụng lớp datetme() của module datetime.
+    - Lớp datetime() bắt buộc so 3 tham số để tạo 1 date: năm, tháng ngày
+    - Ví dụ:
+        import datetime
+
+        x = datetime.datetime(2020, 5, 17)
+
+        print(x)
+
+    - Lớp datetime() cũng có thể nhận có tham số về thời gian nhưng timezone (giờ, phút, giây, mili giây, tzone), nhưng chúng là sự lựa chọn and có 1 giá trị mặc định là 0, (None cho timezone).
+
+### The strftime() method
+    - Đối tượng datetime có 1 phương thức format đối tượng date trở nên dễ đọc.
+    - Phương thức đó được gọi là strftime(), và nhận 1 tham số, format, để trả ra chuỗi format cụ thể.
+    - Ví dụ:
+        import datetime
+
+        x = datetime.datetime(2018, 6, 1)
+
+        print(x.strftime("%B"))
+
+## Python Maths
+### Build-in math functions (Các hàm toán học tích hợp)
+    - Hàm min() và max() có thể được sử dụng để tìm giá trị nhỏ nhất và lớn nhất trong 1 vòng lặp.
+    - Ví dụ:    
+        x = min(5, 10, 25)
+        y = max(5, 10, 25)
+
+        print(x)
+        print(y)
+
+    - Hàm abs() trả và 1 giá trị tuyệt đối của 1 số cụ thể:
+    - Ví dụ:
+        x = abs(-7.25)
+
+        print(x)
+
+    - Hàm pow(x, y) trả về giá trị của x mũ y
+    - Ví dụ:
+        x = pow(4, 3)
+        print(x)
+
+### The Math module
+    - Python cũng có 1 module tích hợp có tên là math, mở rộng danh sách các hàm toán học
+    - Để sử dụng nó, bạn phải nhập import math:
+    - Ví dụ: import math
+
+    - Khi đã import math, ta có thể bắt đầu sử dụng các pphuowng thức và hằng số của module.
+    - math.sqrt() trả và căn bặc hai của 1 số
+    - math.ceil() là tròn 1 số lên trên số nguyên gần nó nhất và math.floor() phương thức làm tròn số xuông dưới số nguyên gần nhất và trả kết quả.
+    - Hằng math.pi trả về giá trị PI.
+
+## Python JSON
+    - Json là 1 cú pháp lưu trữ là chuyển đổi dữ liệu.
+    - JSON là văn bản, được viết bằng ký hiệu đối tượng javascript
+
+
+### JSON in Python
+    - Python có tích hợp package được gọi là json, đê có thể làm việc với dữ liệu JSON
+    - Ví dụ:
+        import json
+    
+### Parse JSON - Convert from JSON to Python
+    - Nếu có 1 chuỗi JSON, bản có thể parse nó bằng cách dùng hàm json.loads()
+    - Ví dụ:
+        import json
+
+        # some JSON:
+        x =  '{ "name":"John", "age":30, "city":"New York"}'
+
+        # parse x:
+        y = json.loads(x)
+
+        # the result is a Python dictionary:
+        print(y["age"])
+
+### Convert from Python to JSON
+    - Nếu có 1 đối tượng object, bạn có thể chuyển đổi nó thành chuỗi JSON bằng cách sử dụng phương thức json.dumps()
+    - Ví dụ:
+        import json
+
+        # a Python object (dict):
+        x = {
+        "name": "John",
+        "age": 30,
+        "city": "New York"
+        }
+
+        # convert into JSON:
+        y = json.dumps(x)
+
+        # the result is a JSON string:
+        print(y)
+    
+    - Bạn có thể chuyển đổi các loại đối tượng dưới đây thành chuỗi JSON
+        dict
+        list
+        tuple
+        string
+        int
+        float
+        True
+        False
+        None
+
+    - Khi bạn chuyển đổi từ Python sang JSON, các đối tượng Python sẽ được chuyển đổi thành JSON(javascript) tương đương:
+        Python	JSON
+        dict	Object
+        list	Array
+        tuple	Array
+        str 	String
+        int	    Number
+        float	Number
+        True	true
+        False	false
+        None	null
+
+### Format the result
+    - Việc in ra 1 chuỗi JSON, nhưng nó không dễ đọc lắm, không có dấu thụt lề và ngắt dòng.
+    - Phương thúc json.dumps() này có các tham số để đọc kết quả dễ hơn.
+    - Ví dụ:
+        json.dumps(x, indent=4)
+
+    - Sử dụng tham số indent để xác định số lượng thụt lề.
+    - Ta cũng có thể xác định các dấu phân cách, giá trị mặc định là (",", ":"), nghĩa là sử dụng dấu phẩy và dáu cách để ơhaan tách từng đối tượng, dấu hai chấm và dấu cách để phân tách khóa khỏi giias trị
+    - Sử dụng tham số separators để thay đổi dấu phân cách mặc định.
+    - ví dụ: json.dumps(x, indent=4, separators=(". ", " = "))
+     
+### Order the results
+    - phương thức json.dumps() có các tham số để sắp xếp các khóa trong kết quả.
+    - Sử dụng tham số sort_keys để xác định xem kết quả có nên được sắp xếp hay không.
+    - Ví dụ: json.dumps(x, indent=4, sort_keys=True)
+
+## Python RegEx
